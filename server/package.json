@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.50",
+  "scripts": {
+    "dev": "bun run --watch src/server.ts"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.0.2",
+    "@elysiajs/jwt": "^1.0.2",
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "module": "src/server.js"
+}
