@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #cccccc;
   position: fixed;
   top: 0;
   left: 0;
@@ -11,20 +10,20 @@
 }
 
 .form {
-  background-color: #ffffff;
   display: flex;
   width: 70vw;
   min-height: 70vh;
   border-radius: 20px;
-}
-
-.form-input {
-  margin: 6px 0;
-  width: 70%;
+  box-shadow: 0 0 20px #d2d2d2;
 }
 
 .animate {
   width: 50%;
+
+  & img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 
 .form-login {
@@ -32,82 +31,9 @@
   flex-direction: column;
   flex: 1;
   padding: 10px;
-  justify-content: space-between;
 
   .heading h3 {
     font-size: 1.4em;
     text-align: center;
   }
 }
-
-.forgot-password {
-  display: flex;
-  justify-content: end;
-}
-
-.form-submit {
-  display: flex;
-  justify-content: center;
-}
-
-.text-login {
-  text-align: center;
-  position: relative;
-  padding: 10px 0;
-  // & span::before {
-  //   content: "";
-  //   display: block;
-  //   width: 100px;
-  //   height: 2px;
-  //   background-color: #000;
-  //   position: absolute;
-  // }
-
-  // & span::after {
-  //   content: "";
-  //   display: block;
-  //   width: 100px;
-  //   height: 2px;
-  //   background-color: #000;
-  //   position: absolute;
-  // }
-}
-
-.google {
-  display: flex;
-  justify-content: center;
-
-  & .wrap-icon {
-    width: 5rem;
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-
-  & .wrap-icon:hover {
-    background-color: #cccccc;
-    transition: all .2s ease-out;
-  }
-}
-
-.animate {}
-
-.animate img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.info-account {
-  text-align: end;
-
-  &>a {
-    color: rgb(74, 168, 255);
-    text-decoration: none;
-    margin: 0 10px;
-  }
-}
-
-.form-action {}

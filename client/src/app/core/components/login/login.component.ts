@@ -1,18 +1,34 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { SocialComponent } from '../social/social.component';
+
+const AngularModule = [FormsModule, RouterLink];
+const MdbModule = [MdbFormsModule];
+const ComponentModule = [SocialComponent]
 @Component({
   selector: 'pm-login',
   standalone: true,
-  imports: [FormsModule, RouterLink, RouterLinkActive],
+  imports: [AngularModule, MdbModule, ComponentModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  form = {
-    email: '',
-    password: ''
-  }
+  social = [
+    {
+      icon: 'fab fa-facebook-f'
+    },
+    {
+      icon: 'fab fa-google'
+    },
+    {
+      icon: 'fab fa-twitter'
+    },
+    {
+      icon: 'fab fa-github'
+    },
+  ]
   handleSubmit() {
 
   }

@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// defined models for application
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String   @unique
+  email     String   @unique
+  role      String   @default("user")
+  status    Boolean  @default(true)
+  password  String   @unique
+  phone     Int?     @unique
+  address   String?  @db.String
+  createAt  DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  Project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?  @db.ObjectId
+  Task      Task?    @relation(fields: [taskId], references: [id])
+  taskId    String?  @db.ObjectId
+}
+
+model Project {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        BigInt
+  description String
+  leader      String
+  member      User[]
+  Task        Task[]
+}
+
+model Task {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  project     Project  @relation(fields: [projectId], references: [id])
+  projectId   String   @db.ObjectId
+  name        String   @db.String
+  description String   @db.String
+  member      User[]
+  startDate   DateTime @default(now())
+  endDate     DateTime @updatedAt
+  progess     String
+}

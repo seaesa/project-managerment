@@ -40,4 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+# config ignore
 src/environments/
+package-*.json

@@ -1,7 +1,12 @@
-import Elysia from "elysia"
+import Elysia, { t } from "elysia";
+import getController from "../controllers/getController";
+import postController from "../controllers/postController";
+import putController from "../controllers/putController";
+import deleteController from "../controllers/deleteController";
 
-const router = (): Elysia => {
-  return new Elysia()
-}
 
-export default router();
+export default new Elysia()
+  .use(getController)
+  .use(postController)
+  .use(putController)
+  .use(deleteController)

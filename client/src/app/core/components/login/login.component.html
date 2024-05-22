@@ -1,48 +1,45 @@
-<div class="main">
-  <div class="overlay">
-    <div class="form">
-      <div class="animate">
-        <img src="../../../../assets/images/login.png" alt="">
+<div class="overlay">
+  <div class="form">
+    <div class="animate">
+      <img src="../../../../assets/images/login.png" alt="logo">
+    </div>
+    <div class="form-login">
+      <div class="heading mb-4">
+        <h3>Login</h3>
       </div>
-      <div class="form-login">
-        <div class="heading">
-          <h3>Login</h3>
-        </div>
-        <div class="form-action">
-          <form action="">
-            <div class="form-group">
-              <div class="icon"></div>
-              <input [(ngModel)]="form.email" class="input form-input" type="email" name="email" placeholder="email">
-            </div>
-            <div class="form-group">
-              <div class="icon"></div>
-              <input [(ngModel)]="form.password" class="input form-input" type="password" name="password"
-                placeholder="password">
-            </div>
-          </form>
-          <div class="forgot-password">
-            <a href="">Forgot Password</a>
-          </div>
-          <div class="form-submit">
-            <button (click)="handleSubmit()" class="btn" type="submit">Login</button>
-          </div>
-        </div>
 
-        <div>
-          <div class="text-login">
-            <span>or login with</span>
-          </div>
-          <div class="google">
-            <div class="wrap-icon">
-              <i class="fa-brands fa-google fa-xl"></i>
+      <form>
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="email" id="email" class="form-control" />
+          <label mdbLabel class="form-label" for="email">Email</label>
+        </mdb-form-control>
+
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="password" id="password" class="form-control" />
+          <label mdbLabel class="form-label" for="password">Password</label>
+        </mdb-form-control>
+
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <div class="form-check">
+              <input mdbCheckbox class="form-check-input" type="checkbox" value="" id="remember" [checked]="true" />
+              <label class="form-check-label" for="remember">Remember me</label>
             </div>
           </div>
+
+          <div class="col">
+            <a routerLink="/auth/forgot-password">Forgot password?</a>
+          </div>
         </div>
-        <div class="info-account">
-          <span>you don't have account</span>
-          <a routerLink="/signup">Signup</a>
+        <button mdbRipple type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+        <div class="text-center">
+          <p>Not a member? <a routerLink="/auth/signup">Register</a></p>
+          <p>or sign up with:</p>
+          @for (item of social; track $index) {
+          <pm-social [icon]="item.icon"></pm-social>
+          }
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

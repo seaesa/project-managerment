@@ -1,48 +1,8 @@
-@import './assets/styles/fonts', './assets/styles/variable';
-$primary-color: #ffc4fa;
-$black-color: #000000;
-$white-color: #ffffff;
-
-:root {
-  --primary-color: $primary-color,
-    --black-color: $black-color,
-    --white-color: $white-color,
-}
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-html {
-  font-family: "Roboto", sans-serif;
-  scroll-behavior: smooth;
-}
-
-.btn {
-  outline: none;
-  border: none;
-  text-decoration: none;
-  background-color: $primary-color;
-  color: $white-color;
-  cursor: pointer;
-  padding: 8px 14px;
-  font-size: 1rem;
-  border-radius: 100em;
-  min-width: 8em;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.input {
-  border: 2px solid #ccc;
-  outline: none;
-  padding: 10px 12px;
-  border-radius: 10em;
-}
-
-.input:focus {
-  transition: all .6s ease-in-out;
-  border: 2px solid #676767;
 }

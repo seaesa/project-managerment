@@ -1,51 +1,37 @@
-<div class="main">
-  <div class="overlay">
-    <div class="form">
-      <div class="animate">
-        <img src="../../../../assets/images/login.png" alt="">
+<div class="overlay">
+  <div class="form">
+    <div class="animate">
+      <img src="../../../../assets/images/login.png" alt="logo">
+    </div>
+    <div class="form-login">
+      <div class="heading mb-4">
+        <h3>Sign Up</h3>
       </div>
-      <div class="form-login">
-        <div class="heading">
-          <h3>Sign Up</h3>
-        </div>
-        <div class="form-action">
-          <form action="">
-            <div class="form-group">
-              <div class="icon"></div>
-              <input class="input form-input" type="email" name="email" placeholder="email">
-            </div>
-            <div class="form-group">
-              <div class="icon"></div>
-              <input class="input form-input" type="password" name="password" placeholder="password">
-            </div>
-            <div class="form-group">
-              <div class="icon"></div>
-              <input class="input form-input" type="password" name="confirmPassword" placeholder="confirm password">
-            </div>
-          </form>
-          <div class="forgot-password">
-            <a href="">Forgot Password</a>
-          </div>
-          <div class="form-submit">
-            <button class="btn" type="submit">Login</button>
-          </div>
-        </div>
 
-        <div>
-          <div class="text-login">
-            <span>or login with</span>
-          </div>
-          <div class="google">
-            <div class="wrap-icon">
-              <i class="fa-brands fa-google fa-xl"></i>
-            </div>
-          </div>
+      <form>
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="email" id="email" class="form-control" />
+          <label mdbLabel class="form-label" for="email">Email</label>
+        </mdb-form-control>
+
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="password" id="password" class="form-control" />
+          <label mdbLabel class="form-label" for="password">Password</label>
+        </mdb-form-control>
+        <mdb-form-control class="mb-4">
+          <input mdbInput type="password" id="confirmPassword" class="form-control" />
+          <label mdbLabel class="form-label" for="confirmPassword">Confirm Password</label>
+        </mdb-form-control>
+
+        <button mdbRipple type="button" class="btn btn-primary btn-block mb-4">Sign Up</button>
+        <div class="text-center">
+          <p>You Have Accoubt: <a routerLink="/auth/signup">Login</a></p>
+          <p>or login with:</p>
+          @for (item of social; track $index) {
+          <pm-social [icon]="item.icon"></pm-social>
+          }
         </div>
-        <div class="info-account">
-          <span>you have account</span>
-          <a routerLink="/login">Login</a>
-        </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>
