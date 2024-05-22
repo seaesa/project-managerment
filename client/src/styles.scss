@@ -3,6 +3,12 @@ $primary-color: #ffc4fa;
 $black-color: #000000;
 $white-color: #ffffff;
 
+:root {
+  --primary-color: $primary-color,
+    --black-color: $black-color,
+    --white-color: $white-color,
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -27,4 +33,16 @@ html {
   min-width: 8em;
   max-width: 100%;
   max-height: 100%;
+}
+
+.input {
+  border: 2px solid #ccc;
+  outline: none;
+  padding: 10px 12px;
+  border-radius: 10em;
+}
+
+.input:focus {
+  transition: all .6s ease-in-out;
+  border: 2px solid #676767;
 }

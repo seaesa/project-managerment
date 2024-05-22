@@ -1,36 +1,46 @@
 <div class="main">
   <div class="overlay">
     <div class="form">
-      <div class="animate"></div>
+      <div class="animate">
+        <img src="../../../../assets/images/login.png" alt="">
+      </div>
       <div class="form-login">
-        <div>
+        <div class="heading">
           <h3>Login</h3>
         </div>
-        <form action="">
-          <div class="form-group">
-            <div class="icon"></div>
-            <div class="input"></div>
+        <div class="form-action">
+          <form action="">
+            <div class="form-group">
+              <div class="icon"></div>
+              <input [(ngModel)]="form.email" class="input form-input" type="email" name="email" placeholder="email">
+            </div>
+            <div class="form-group">
+              <div class="icon"></div>
+              <input [(ngModel)]="form.password" class="input form-input" type="password" name="password"
+                placeholder="password">
+            </div>
+          </form>
+          <div class="forgot-password">
+            <a href="">Forgot Password</a>
           </div>
-          <div class="form-group">
-            <div class="icon"></div>
-            <div class="input"></div>
+          <div class="form-submit">
+            <button (click)="handleSubmit()" class="btn" type="submit">Login</button>
           </div>
-        </form>
-        <div class="">
-          <a href="">Forgot Password</a>
-          <button class="btn" type="submit">Login</button>
         </div>
+
         <div>
-          <div>
-            or login with
+          <div class="text-login">
+            <span>or login with</span>
           </div>
           <div class="google">
-
+            <div class="wrap-icon">
+              <i class="fa-brands fa-google fa-xl"></i>
+            </div>
           </div>
         </div>
-        <div>
+        <div class="info-account">
           <span>you don't have account</span>
-          <a href="">Signup</a>
+          <a routerLink="/signup">Signup</a>
         </div>
       </div>
     </div>
