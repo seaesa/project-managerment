@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
+import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { SocialComponent } from '../social/social.component';
+import { Http } from '../../services/http.service';
+import { CookieService } from 'ngx-cookie-service';
 
-const AngularModule = [FormsModule, RouterLink];
-const MdbModule = [MdbFormsModule];
+const AngularModule = [FormsModule, RouterLink, ReactiveFormsModule];
+const MdbModule = [MdbFormsModule, MdbValidationModule];
 const ComponentModule = [SocialComponent]
 @Component({
   selector: 'pm-login',
@@ -15,6 +18,9 @@ const ComponentModule = [SocialComponent]
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  declare validationForm: FormGroup
+  http = inject(Http)
+  waiting = false
   social = [
     {
       icon: 'fab fa-facebook-f'
@@ -29,7 +35,30 @@ export class LoginComponent {
       icon: 'fab fa-github'
     },
   ]
+  constructor(
+    private builder: FormBuilder,
+    private router: Router,
+    private cookie: CookieService
+  ) {
+    this.validationForm = this.builder.group({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [Validators.required])
+    })
+  }
+  /**
+   * @GET : method in this class get value in form group
+   */
+  get email() {
+    return this.validationForm.get('email')!
+  }
+  get password() {
+    return this.validationForm.get('password')!
+  }
   handleSubmit() {
-
+    this.validationForm.markAllAsTouched()
+    this.waiting = true;
+    // this.http.post('/auth/login', this.validationForm.value).subscribe(res => {
+    //   this.waiting = false
+    // })
   }
 }
