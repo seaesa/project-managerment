@@ -16,7 +16,7 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "email":"efwefwe",
+  "email":"herfergail.com",
   "password":"wfewef",
-  "token":"eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjF9.ag9GcX2yE26FPlZiKwK0kKOX78AubkArwPTyszuODAI"
+  "confirmPassword":"wfewef"
 }
