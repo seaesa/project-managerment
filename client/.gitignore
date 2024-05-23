@@ -43,3 +43,5 @@ Thumbs.db
 # config ignore
 src/environments/
 package-*.json
+
+/.angular

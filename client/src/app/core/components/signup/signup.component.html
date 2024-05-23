@@ -8,25 +8,53 @@
         <h3>Sign Up</h3>
       </div>
 
-      <form>
+      <form [formGroup]="validationForm" (ngSubmit)="handleSubmit()">
         <mdb-form-control class="mb-4">
-          <input mdbInput type="email" id="email" class="form-control" />
+          <input formControlName="email" mdbInput mdbValidate type="email" id="email" class="form-control" />
           <label mdbLabel class="form-label" for="email">Email</label>
+          @if (email.invalid && (email.dirty || email.touched)) {
+          @if(email.hasError('email')) {
+          <mdb-error class="invalid">This feild must be email!</mdb-error>
+          }@else if (email.hasError('required')) {
+          <mdb-error class="invalid">Email is required!</mdb-error>
+          }
+          }
         </mdb-form-control>
 
         <mdb-form-control class="mb-4">
-          <input mdbInput type="password" id="password" class="form-control" />
+          <input formControlName="password" mdbInput mdbValidate type="password" id="password" class="form-control" />
           <label mdbLabel class="form-label" for="password">Password</label>
+          @if (password.invalid && (password.dirty || password.touched)) {
+          @if (password.hasError('required')) {
+          <mdb-error class="invalid">Password is required!</mdb-error>
+          }@else if (password.hasError('minlength')) {
+          <mdb-error class="invalid">Password is must be least {{password.getError('minlength').requiredLength}}
+            characters!</mdb-error>
+          }
+          }
         </mdb-form-control>
         <mdb-form-control class="mb-4">
-          <input mdbInput type="password" id="confirmPassword" class="form-control" />
+          <input formControlName="confirmPassword" mdbInput mdbValidate type="password" id="confirmPassword"
+            class="form-control" />
           <label mdbLabel class="form-label" for="confirmPassword">Confirm Password</label>
+          @if (confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)) {
+          @if (confirmPassword.hasError('required')) {
+          <mdb-error class="invalid">Confirm passowrd is required!</mdb-error>
+          }@else if (confirmPassword.hasError('matched')) {
+          <mdb-error class="invalid">Password not matched!</mdb-error>
+          }
+          }
         </mdb-form-control>
 
-        <button mdbRipple type="button" class="btn btn-primary btn-block mb-4">Sign Up</button>
+        <button [disabled]="validationForm.invalid || waiting" mdbRipple
+          class="d-flex align-items-center justify-content-center btn btn-primary btn-block mb-4" type="submit">
+          <span [hidden]="!waiting" class="spinner-border spinner-border-sm mx-2" role="status"
+            aria-hidden="true"></span>
+          {{waiting ? 'waiting...': 'Login'}}
+        </button>
         <div class="text-center">
-          <p>You Have Accoubt: <a routerLink="/auth/login">Login</a></p>
-          <p>or login with:</p>
+          <p>You Have Account: <a routerLink="/auth/login">Sign Up</a></p>
+          <p>or signup with:</p>
           @for (item of social; track $index) {
           <pm-social [icon]="item.icon"></pm-social>
           }
