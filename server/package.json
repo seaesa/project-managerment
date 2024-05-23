@@ -6,7 +6,8 @@
     "schema": "src/db/mongo.prisma"
   },
   "scripts": {
-    "dev": "bun run --watch src/server.ts"
+    "dev": "bun run --watch src/server.ts",
+    "reset": "npx prisma db push"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.0.2",
