@@ -1,6 +1,11 @@
 @import '@fortawesome/fontawesome-free/css/all.css';
 @import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
 
+:root {
+  --container-spacing: 1.5rem;
+  --header-height: 60px;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -10,4 +15,25 @@
 .invalid {
   margin-left: 10px;
   top: 36px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollbar-sm::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(214, 214, 214);
+  border-radius: 10px;
+  overflow: hidden;
 }
