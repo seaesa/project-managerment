@@ -1,0 +1,22 @@
+.navbar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.btn--color {
+  color: var(--mdb-nav-link-color)
+}
+
+.navbar-brand-img__link {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+.navbar-brand-img {
+  position: absolute;
+  width: 5.65em;
+  height: auto;
+}
