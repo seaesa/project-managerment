@@ -72,13 +72,16 @@ export class SignupComponent {
   handleSubmit() {
     this.validationForm.markAllAsTouched()
     this.waiting = true
-    this.http.post('/auth/login', this.validationForm.value).subscribe((res: any) => {
-      if (res.ok && !res.error) {
+    this.http.post('/auth/register', this.validationForm.value).subscribe((res: any) => {
+      if (!res.error) {
         this.waiting = false
         this.router.navigateByUrl('/auth/verify-user')
       } else {
-        console.log(res)
+        this.validationForm.controls['email'].setErrors({ emailExisted: res.message })
+        this.waiting = false
       }
+      console.log(this.validationForm.controls['email'])
+      console.log(this.validationForm.controls['email'].getError('message'))
     })
   }
 }
