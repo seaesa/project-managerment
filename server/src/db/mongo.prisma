@@ -7,24 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Data Type
+enum Role {
+  null
+  member
+  leader
+  system
+}
+
 // defined models for application
 model User {
-  id        String      @id @default(auto()) @map("_id") @db.ObjectId
-  username  String      @unique
-  email     String      @unique
-  role      String      @default("user")
-  status    Boolean     @default(true)
-  password  String      @unique
-  phone     Int?        @unique
-  address   String?     @db.String
-  isVerify  Boolean     @default(false)
-  createAt  DateTime    @default(now())
-  updateAt  DateTime    @default(now()) @updatedAt
-  Project   Project?    @relation(fields: [projectId], references: [id]) @ignore
-  projectId String?     @ignore @db.ObjectId
-  Task      Task?       @relation(fields: [taskId], references: [id]) @ignore
-  taskId    String?     @ignore @db.ObjectId
-  VerifyOTP VerifyOTP[] @ignore
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  username      String      @unique @db.String
+  email         String      @unique @db.String
+  role          Role        @default(null)
+  password      String      @unique @db.String
+  phone         Int?        @unique @db.Long
+  address       String?     @db.String
+  image         String?     @db.String
+  isVerifyEmail Boolean     @default(false) @db.Bool
+  isMember      Boolean     @default(false) @db.Bool
+  createAt      DateTime    @default(now()) @db.Date
+  updateAt      DateTime    @updatedAt @db.Date
+  Project       Project?    @relation(fields: [projectId], references: [id]) @ignore
+  projectId     String?     @ignore @db.ObjectId
+  Task          Task?       @relation(fields: [taskId], references: [id]) @ignore
+  taskId        String?     @ignore @db.ObjectId
+  VerifyOTP     VerifyOTP[] @ignore
 }
 
 model Project {
