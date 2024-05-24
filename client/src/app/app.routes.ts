@@ -13,7 +13,7 @@ export const routes: Routes = [
     path: 'auth', component: ProtectedComponent, children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
-      { path: 'verify', component: VerifycodeComponent },
+      { path: 'verify-user', component: VerifycodeComponent },
     ]
   },
   {

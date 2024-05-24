@@ -1,1 +1,21 @@
-<p>verifycode works!</p>
+<div class="d-flex justify-content-center mt-4 align-items-center">
+  <form (ngSubmit)="handleSubmitCode()" class="d-flex flex-column shadow-5-strong w-auto h-auto px-2 py-2">
+    <div>
+      <h5 style="box-shadow: 0 1px 0px #ccc;">verify code from your email</h5>
+      <p class="lead fs-6">if you don't receive code. please click resend code</p>
+    </div>
+    <mdb-form-control>
+      <input [formControl]="code" mdbValidate mdbInput type="text" id="code" class="form-control" name="code"
+        [maxlength]="maxLength" />
+      <label mdbLabel class="form-label" for="code">Code</label>
+      <!-- <mdb-error style="top: 40px" class="invalid">error</mdb-error> -->
+    </mdb-form-control>
+    <a class="my-2 ms-auto" href="">resend code</a>
+    <button [disabled]="code.invalid || waiting" mdbRipple
+      class="d-flex align-items-center justify-content-center btn btn-primary btn-block mb-4" type="submit">
+      <span [hidden]="!waiting" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span>
+      {{waiting ? 'waiting...': 'Submit'}}
+    </button>
+  </form>
+
+</div>

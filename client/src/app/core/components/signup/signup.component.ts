@@ -3,8 +3,9 @@ import { Router, RouterLink } from '@angular/router';
 import { SocialComponent } from '../social/social.component';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Http } from '../../services/http.service';
+import { Http } from '../../../shared/http/http.service';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
+import { UserService } from '../../../shared/user/user.service';
 
 const AngularModule = [RouterLink, ReactiveFormsModule];
 const MdbModule = [MdbFormsModule, MdbValidationModule];
@@ -19,6 +20,7 @@ const ComponentModule = [SocialComponent];
 export class SignupComponent {
   declare validationForm: FormGroup
   http = inject(Http)
+  user = inject(UserService)
   waiting = false
   social = [
     {
@@ -75,13 +77,12 @@ export class SignupComponent {
     this.http.post('/auth/register', this.validationForm.value).subscribe((res: any) => {
       if (!res.error) {
         this.waiting = false
+        this.user.setUserId(res.userId)
         this.router.navigateByUrl('/auth/verify-user')
       } else {
         this.validationForm.controls['email'].setErrors({ emailExisted: res.message })
         this.waiting = false
       }
-      console.log(this.validationForm.controls['email'])
-      console.log(this.validationForm.controls['email'].getError('message'))
     })
   }
 }
