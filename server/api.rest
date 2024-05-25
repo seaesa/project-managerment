@@ -1,22 +1,35 @@
-
-
-
-
-### POST REQUEST
+### login
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
   "email":"hairipi100@gmail.com",
-  "password":"wfewef"
+  "password":"cocainit"
 }
 
-###
-POST http://localhost:3000/api/auth/register
+### register
+POST http://localhost:3000/api/auth/register 
 Content-Type: application/json
 
 {
-  "email":"herfergail.com",
-  "password":"wfewef",
-  "confirmPassword":"wfewef"
+  "email":"hairipi100@gmail.com",
+  "password":"cocainit",
+  "confirmPassword":"cocainit"
+}
+ 
+
+### verify code
+POST http://localhost:3000/api/auth/verify-otp
+Content-Type: application/json
+
+{
+   
+}
+
+### verify user
+POST http://localhost:3000/api/auth/current-user
+Content-Type: application/json
+
+{
+  "token":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI2NjUwMDBlNTBjNGRhZjdlNjRlZmY4NjkiLCJyb2xlIjoibnVsbCJ9.PsNoMz_uj1Mf1C1Za-8bueU3sGyXP4pQQrWgeunC3YQ"
 }

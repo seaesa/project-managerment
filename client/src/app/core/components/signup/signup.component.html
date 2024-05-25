@@ -8,7 +8,7 @@
         <h3>Sign Up</h3>
       </div>
 
-      <form [formGroup]="validationForm" (ngSubmit)="handleSubmit()">
+      <form (ngSubmit)="handleSubmit()" [formGroup]="validationForm">
         <mdb-form-control class="mb-4">
           <input formControlName="email" mdbInput mdbValidate type="email" id="email" class="form-control" />
           <label mdbLabel class="form-label" for="email">Email</label>
@@ -17,6 +17,8 @@
           <mdb-error class="invalid">This feild must be email!</mdb-error>
           }@else if (email.hasError('required')) {
           <mdb-error class="invalid">Email is required!</mdb-error>
+          }@else if (email.hasError('emailExisted')) {
+          <mdb-error class="invalid">{{email.getError('emailExisted')}}</mdb-error>
           }
           }
         </mdb-form-control>
@@ -46,11 +48,11 @@
           }
         </mdb-form-control>
 
-        <button [disabled]="validationForm.invalid || waiting" mdbRipple
-          class="d-flex align-items-center justify-content-center btn btn-primary btn-block mb-4" type="submit">
-          <span [hidden]="!waiting" class="spinner-border spinner-border-sm mx-2" role="status"
-            aria-hidden="true"></span>
-          {{waiting ? 'waiting...': 'Login'}}
+        <button [disabled]="validationForm.invalid || waiting" type="submit" mdbRipple
+          class="d-flex align-items-center justify-content-center btn btn-primary btn-block mb-4">
+          <span [hidden]="!waiting" class="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true">
+          </span>
+          {{waiting ? 'waiting...': 'Sign up'}}
         </button>
         <div class="text-center">
           <p>You Have Account: <a routerLink="/auth/login">Sign Up</a></p>

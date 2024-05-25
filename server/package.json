@@ -6,7 +6,8 @@
     "schema": "src/db/mongo.prisma"
   },
   "scripts": {
-    "dev": "bun run --watch src/server.ts"
+    "dev": "bun run --watch src/server.ts",
+    "reset": "npx prisma db push"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.0.2",
@@ -14,11 +15,14 @@
     "@prisma/client": "^5.13.0",
     "bcrypt": "^5.1.1",
     "elysia": "latest",
-    "mongoose": "^8.3.4"
+    "mongoose": "^8.3.4",
+    "nodemailer": "^6.9.13"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.12.11",
+    "@types/nodemailer": "^6.4.15",
+    "@yalhyane/elysia-morgan": "^0.0.2",
     "bun-types": "latest",
     "dotenv": "^16.4.5",
     "prisma": "^5.13.0",

@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { SocialComponent } from '../social/social.component';
-import { Http } from '../../services/http.service';
+import { Http } from '../../../shared/http/http.service';
 import { CookieService } from 'ngx-cookie-service';
 
 const AngularModule = [FormsModule, RouterLink, ReactiveFormsModule];
@@ -57,8 +57,14 @@ export class LoginComponent {
   handleSubmit() {
     this.validationForm.markAllAsTouched()
     this.waiting = true;
-    // this.http.post('/auth/login', this.validationForm.value).subscribe(res => {
-    //   this.waiting = false
-    // })
+    this.http.post('/auth/login', this.validationForm.value).subscribe((res: any) => {
+      if (!res.error) {
+        this.waiting = false
+        this.cookie.set('user', res.token, { path: '/' })
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          window.location.reload()
+        })
+      }
+    })
   }
 }

@@ -41,7 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 # config ignore
-src/environments/
-package-*.json
-
-/.angular
+src/environments/*
+package-*.json 
