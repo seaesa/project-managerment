@@ -26,21 +26,4 @@ export class LayoutComponent {
     if (url === '/')
       this.router.navigateByUrl('/dashboard')
   }
-  ngOnInit() {
-    const userToken = this.cookie.get('user')
-    if (userToken) {
-      this.http.post('/auth/current-user', { token: userToken }).subscribe((res: any) => {
-        if (res.error) {
-          console.log(res)
-          this.cookie.delete('user')
-          this.router.navigateByUrl('/auth/login')
-        } else {
-          this.user.setUser(res.user)
-        }
-      })
-    }
-    else {
-      this.router.navigateByUrl('/auth/login')
-    }
-  }
 }

@@ -61,7 +61,9 @@ export class LoginComponent {
       if (!res.error) {
         this.waiting = false
         this.cookie.set('user', res.token, { path: '/' })
-        this.router.navigateByUrl('/')
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          window.location.reload()
+        })
       }
     })
   }

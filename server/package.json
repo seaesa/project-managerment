@@ -22,6 +22,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.12.11",
     "@types/nodemailer": "^6.4.15",
+    "@yalhyane/elysia-morgan": "^0.0.2",
     "bun-types": "latest",
     "dotenv": "^16.4.5",
     "prisma": "^5.13.0",
