@@ -9,6 +9,7 @@ export class UserService {
     id: string,
     email: string,
     username: string,
+    role: string,
     [key: string]: string | null
   }
   constructor() { }
@@ -23,5 +24,9 @@ export class UserService {
   }
   setUser(object: any) {
     this.user = object
+  }
+  isAccess(role: string | Array<string>) {
+    console.log(role)
+    return role.includes(this.user.role)
   }
 }

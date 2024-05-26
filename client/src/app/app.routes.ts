@@ -7,7 +7,6 @@ import { LayoutComponent } from './core/components/layout/layout.component';
 import { ProjectComponent } from './core/components/project/project.component';
 import { ProtectedComponent } from './core/components/protected/protected.component';
 import { VerifycodeComponent } from './core/components/verifycode/verifycode.component';
-
 export const routes: Routes = [
   {
     path: 'auth', component: ProtectedComponent, children: [
@@ -17,7 +16,8 @@ export const routes: Routes = [
     ]
   },
   {
-    path: '', component: LayoutComponent, children: [
+    path: '',
+    component: LayoutComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'project', component: ProjectComponent }
     ]
