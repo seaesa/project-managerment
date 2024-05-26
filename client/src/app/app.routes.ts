@@ -7,6 +7,8 @@ import { LayoutComponent } from './core/components/layout/layout.component';
 import { ProjectComponent } from './core/components/project/project.component';
 import { ProtectedComponent } from './core/components/protected/protected.component';
 import { VerifycodeComponent } from './core/components/verifycode/verifycode.component';
+import { inject } from '@angular/core';
+import { UserService } from './shared/user/user.service';
 
 export const routes: Routes = [
   {
@@ -17,7 +19,8 @@ export const routes: Routes = [
     ]
   },
   {
-    path: '', component: LayoutComponent, children: [
+    path: '',
+    component: LayoutComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'project', component: ProjectComponent }
     ]

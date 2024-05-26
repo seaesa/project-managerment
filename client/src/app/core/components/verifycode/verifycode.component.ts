@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Http } from '../../../shared/http/http.service';
 import { UserService } from '../../../shared/user/user.service';
+import { Router } from '@angular/router';
 const AngularModule = [FormsModule]
 const MdbModule = [MdbFormsModule, MdbValidationModule, ReactiveFormsModule]
 @Component({
@@ -23,6 +24,7 @@ export class VerifycodeComponent {
   code = new FormControl(null, [Validators.maxLength(4), Validators.minLength(4), Validators.required, this.validateNumber()])
   constructor(
     private cookie: CookieService,
+    private router: Router
   ) { }
   validateNumber() {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -34,10 +36,14 @@ export class VerifycodeComponent {
     this.code.markAllAsTouched()
     this.waiting = true
     const userId = this.user.getUserId()
-    this.http.post('/auth/verify-otp', { otp: this.code.value, userId }).subscribe(res => {
-      this.code.setValue(null)
-      this.waiting = false
-      console.log(res)
+    this.http.post('/auth/verify-otp', { otp: this.code.value, userId }).subscribe((res: any) => {
+      if (res.error) {
+        console.log(res)
+      } else {
+        this.code.setValue(null)
+        this.waiting = false
+        this.router.navigateByUrl('/auth/login')
+      }
     })
   }
 }

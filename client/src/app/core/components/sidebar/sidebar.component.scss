@@ -2,6 +2,10 @@
   max-height: calc(100vh - var(--header-height) - var(--container-spacing));
 }
 
+.sidebar-item {
+  background-color: #fbfbfb;
+}
+
 .sidebar-item:not(.sidebar-item:last-child) {
-  margin-bottom: 10px;
+  padding-bottom: 10px;
 }

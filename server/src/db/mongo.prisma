@@ -12,7 +12,7 @@ enum Role {
   null
   member
   leader
-  system
+  admin
 }
 
 // defined models for application
@@ -20,7 +20,7 @@ model User {
   id            String      @id @default(auto()) @map("_id") @db.ObjectId
   username      String      @unique @db.String
   email         String      @unique @db.String
-  role          Role        @default(null)
+  role          Role        @default(member)
   password      String      @unique @db.String
   phone         Int?        @unique @db.Long
   address       String?     @db.String
