@@ -12,8 +12,4 @@ const AngularModule = [FormsModule]
   styleUrl: './add-project.component.scss'
 })
 export class AddProjectComponent {
-  date = null;
-  onChange(result: Date): void {
-    console.log('onChange: ', result);
-  }
 }
