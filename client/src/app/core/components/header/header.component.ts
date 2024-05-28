@@ -6,7 +6,6 @@ import { MdbFormsModule } from 'mdb-angular-ui-kit/forms';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { UserService } from '../../../shared/user/user.service';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 const AngularModule = [RouterLink, CommonModule]
@@ -27,14 +26,13 @@ export class HeaderComponent {
     private router: Router,
   ) {
   }
+  ngDoCheck() {
+    if (!this.user) {
+      this.user = this.userService.getUser()
+    }
+  }
   handleLogOut() {
     this.cookie.delete('user')
     this.router.navigateByUrl('/auth/login')
-  }
-  ngDoCheck() {
-    if (!this.user) {
-      console.log(this.user)
-      this.user = this.userService.getUser()
-    }
   }
 }
