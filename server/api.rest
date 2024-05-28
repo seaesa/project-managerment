@@ -33,3 +33,7 @@ Content-Type: application/json
 {
   "token":"eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiI2NjUwMDBlNTBjNGRhZjdlNjRlZmY4NjkiLCJyb2xlIjoibnVsbCJ9.PsNoMz_uj1Mf1C1Za-8bueU3sGyXP4pQQrWgeunC3YQ"
 }
+
+
+### all user
+GET http://localhost:3000/api/all-user
