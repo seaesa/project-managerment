@@ -27,6 +27,8 @@
           @if (password.invalid && (password.dirty || password.touched)) {
           @if (password.hasError('required')) {
           <mdb-error class="invalid">Password is required!</mdb-error>
+          }@else if (password.hasError('incorrect')) {
+          <mdb-error class="invalid">{{password.getError('incorrect')}}</mdb-error>
           }
           }
         </mdb-form-control>

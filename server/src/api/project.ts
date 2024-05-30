@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 export const project = new Elysia()
   // [POST] /api/create-product : create a project
-  .post('/api/create-product', async ({ body }) => {
+  .post('/api/project/create', async ({ body }) => {
     const { name, description, leader, member } = body as any
     const product = await prisma.project.create({
       data: {

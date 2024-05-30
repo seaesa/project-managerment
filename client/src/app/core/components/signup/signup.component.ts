@@ -6,14 +6,17 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErr
 import { Http } from '../../../shared/http/http.service';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { UserService } from '../../../shared/user/user.service';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 
 const AngularModule = [RouterLink, ReactiveFormsModule];
 const MdbModule = [MdbFormsModule, MdbValidationModule];
 const ComponentModule = [SocialComponent];
+const AntModule = [NzMessageModule];
+
 @Component({
   selector: 'pm-signup',
   standalone: true,
-  imports: [ComponentModule, AngularModule, MdbModule],
+  imports: [ComponentModule, AngularModule, MdbModule, AntModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -39,6 +42,7 @@ export class SignupComponent {
   constructor(
     private builder: FormBuilder,
     private router: Router,
+    private message: NzMessageService
   ) {
     this.validationForm = this.builder.group({
       email: new FormControl('', [Validators.email, Validators.required]),
@@ -72,17 +76,20 @@ export class SignupComponent {
   }
 
   handleSubmit() {
-    this.validationForm.markAllAsTouched()
-    this.waiting = true
-    this.http.post('/auth/register', this.validationForm.value).subscribe((res: any) => {
-      if (!res.error) {
-        this.waiting = false
-        this.user.setUserId(res.userId)
-        this.router.navigateByUrl('/auth/verify-user')
-      } else {
-        this.validationForm.controls['email'].setErrors({ emailExisted: res.message })
-        this.waiting = false
-      }
-    })
+    if (this.validationForm.invalid)
+      this.validationForm.markAllAsTouched()
+    else {
+      this.waiting = true
+      this.http.post('/auth/register', this.validationForm.value).subscribe((res: any) => {
+        if (!res.error) {
+          this.waiting = false
+          this.user.setUserId(res.userId)
+          this.router.navigateByUrl('/auth/verify-user')
+        } else {
+          this.message.error(res.message)
+          this.waiting = false
+        }
+      })
+    }
   }
 }

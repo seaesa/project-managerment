@@ -65,9 +65,9 @@ export const auth = new Elysia()
       // create user
       const newUser = await prisma.user.create({
         data: {
-          email: email,
+          email,
           username: helper.transformEmailToUsername(email),
-          password: bcrypt.hashSync(password, 10),
+          password: bcrypt.hashSync(password, 10)
         }
       })
       userId = newUser.id
