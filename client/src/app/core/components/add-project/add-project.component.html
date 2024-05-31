@@ -1,7 +1,7 @@
 <div style="background: rgb(60 60 60 / 30%);
 z-index: 100;" class="d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0">
   <div
-    class="d-flex flex-column justify-content-center align-items-center bg-light shadow-5-strong w-50 rounded-4 px-2 py-2 overflow-auto">
+    class="d-flex flex-column justify-content-center align-items-center bg-light shadow-5-strong w-50 rounded-4 px-2 py-2 overflow-auto show-animation">
     <button (click)="handleHiddenModal()" type="button" class="btn btn-light btn-floating ms-auto" rippleColor="dark"
       mdbRipple>
       <i class="fa-solid fa-xmark fa-xl"></i>
@@ -21,16 +21,22 @@ z-index: 100;" class="d-flex justify-content-center align-items-center position-
         <label mdbLabel class="form-label" for="description">Description</label>
       </mdb-form-control>
       <div class="form-outline mb-4">
-        <nz-select formControlName="leader" class="w-100" nzSize="large" nzShowSearch [nzLoading]="!fetchData"
-          nzAllowClear nzPlaceHolder="Leader">
-          @for (item of leader; track $index) {
-          <nz-option nzLabel="{{item.username}}" nzValue="{{item.username}}"></nz-option>
+        <nz-select (ngModelChange)="handleModalChange('leader')"
+          (nzBlur)="handleInputBlur('leader',getLeader().invalid)" (nzFocus)="handleInputFocus('leader')"
+          [nzStatus]="leaderStatus" formControlName="leader" class="w-100" nzSize="large" nzShowSearch nzAllowClear
+          nzPlaceHolder="Leader">
+          @for (leader of leaders; track $index) {
+          <nz-option nzLabel="{{leader.username}}" nzValue="{{leader.username}}"></nz-option>
           }
         </nz-select>
       </div>
       <div class="form-outline mb-4">
-        <nz-select class="w-100" nzSize="large" [nzLoading]="!fetchData" nzMode="multiple" nzPlaceHolder="Member"
-          [nzShowArrow]="true" formControlName="member">
+        <nz-select (ngModelChange)="handleModalChange('user')" (nzBlur)="handleInputBlur('user',getMember().invalid)"
+          (nzFocus)="handleInputFocus('user')" [nzStatus]="userStatus" class="w-100" nzSize="large" nzMode="multiple"
+          nzPlaceHolder="Member" [nzShowArrow]="true" formControlName="member">
+          @for (member of members; track $index) {
+          <nz-option nzLabel="{{member.username}}" nzValue="{{member.username}}"></nz-option>
+          }
         </nz-select>
       </div>
       <!-- Submit button -->
@@ -38,8 +44,10 @@ z-index: 100;" class="d-flex justify-content-center align-items-center position-
         <button (click)="handleHiddenModal()" mdbRipple type="button" class="btn btn-light mx-2">
           Cancel
         </button>
-        <button mdbRipple type="submit" class="btn btn-primary mx-2">
-          Create
+        <button [disabled]="formWrap.invalid || waiting" mdbRipple type="submit" class="btn btn-primary mx-2">
+          <span [hidden]="!waiting" class="spinner-border spinner-border-sm mx-2" role="status"
+            aria-hidden="true"></span>
+          {{waiting ? 'waiting...': 'Create'}}
         </button>
       </div>
     </form>

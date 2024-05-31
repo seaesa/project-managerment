@@ -20,13 +20,12 @@ model User {
   id            String      @id @default(auto()) @map("_id") @db.ObjectId
   username      String      @unique @db.String
   email         String      @unique @db.String
-  password      String      @unique @db.String
+  password      String      @db.String
   role          Role        @default(member)
   isVerifyEmail Boolean     @default(false) @db.Bool
   isMember      Boolean     @default(false) @db.Bool
   createAt      DateTime    @default(now()) @db.Date
   updateAt      DateTime    @updatedAt @db.Date
-  phone         Int?        @unique @default(0) @db.Long
   address       String?     @db.String
   image         String?     @db.String
   Project       Project?    @relation(fields: [projectId], references: [id]) @ignore
@@ -38,11 +37,12 @@ model User {
 
 model Project {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
-  name        BigInt
+  name        String
   description String
-  leader      String
-  member      User[]
+  leader      Json
+  member      Json[]
   Task        Task[]
+  User        User[]
 }
 
 model Task {

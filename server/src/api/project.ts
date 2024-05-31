@@ -12,6 +12,7 @@ export const project = new Elysia()
         name,
         description,
         leader,
+        member
       }
     })
     return { error: false, product }
@@ -24,6 +25,6 @@ export const project = new Elysia()
      */
     beforeHandle(context) {
       const { name, description, leader, member } = context.body as any
-      if (!name || !description || !leader || !member) return { error: true, message: 'data nt found!' }
+      if (!name || !description || !leader || !member) return { error: true, message: 'missing data, please try again!' }
     },
   })
