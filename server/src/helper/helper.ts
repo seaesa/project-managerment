@@ -18,7 +18,7 @@ export default new class Helper {
         from: `"PM Service"<${process.env.USER_MAILER}>`,
         to: email,
         subject: 'Verify Your Account!',
-        html: `<h3>${code}</h3>`
+        html: `<h3>${code}</h3>`,
       })
     else
       return new Error('Email is not valid!')

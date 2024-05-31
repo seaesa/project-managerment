@@ -1,23 +1,24 @@
-import { Component, inject } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
-import { UserService } from '../../../shared/user/user.service';
-import { AddProjectComponent } from '../add-project/add-project.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-const ComponentModule = [AddProjectComponent];
+
 const MdbModule = [MdbRippleModule];
-const AnngularModule = [CommonModule]
+const AnngularModule = [CommonModule, FormsModule]
 @Component({
   selector: 'project-header',
   standalone: true,
-  imports: [MdbModule, ComponentModule, AnngularModule],
+  imports: [MdbModule, AnngularModule],
   templateUrl: './project-header.component.html',
   styleUrl: './project-header.component.scss'
 })
 export class ProjectHeaderComponent {
-  user = inject(UserService)
-  open = false
+  openModal = output()
+
+  constructor() { }
   openModalAddProduct() {
-    this.open = true
+    this.openModal.emit()
   }
+
 }

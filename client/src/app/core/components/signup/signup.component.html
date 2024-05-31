@@ -55,7 +55,7 @@
           {{waiting ? 'waiting...': 'Sign up'}}
         </button>
         <div class="text-center">
-          <p>You Have Account: <a routerLink="/auth/login">Sign Up</a></p>
+          <p>You Have Account: <a routerLink="/auth/login">Login</a></p>
           <p>or signup with:</p>
           @for (item of social; track $index) {
           <pm-social [icon]="item.icon"></pm-social>

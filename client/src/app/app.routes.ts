@@ -7,6 +7,10 @@ import { LayoutComponent } from './core/components/layout/layout.component';
 import { ProjectComponent } from './core/components/project/project.component';
 import { ProtectedComponent } from './core/components/protected/protected.component';
 import { VerifycodeComponent } from './core/components/verifycode/verifycode.component';
+import { ReportComponent } from './core/components/report/report.component';
+import { SettingComponent } from './core/components/setting/setting.component';
+import { AnalyticComponent } from './core/components/analytic/analytic.component';
+import { ProjectDetailComponent } from './core/components/project-detail/project-detail.component';
 export const routes: Routes = [
   {
     path: 'auth', component: ProtectedComponent, children: [
@@ -19,7 +23,14 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'project', component: ProjectComponent }
+      {
+        path: 'project', component: ProjectComponent, children: [
+          { path: ':id', component: ProjectDetailComponent }
+        ]
+      },
+      { path: 'report', component: ReportComponent },
+      { path: 'settings', component: SettingComponent },
+      { path: 'analytics', component: AnalyticComponent },
     ]
   },
   { path: '**', component: ErrorComponent }

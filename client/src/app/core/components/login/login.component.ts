@@ -6,14 +6,17 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { SocialComponent } from '../social/social.component';
 import { Http } from '../../../shared/http/http.service';
 import { CookieService } from 'ngx-cookie-service';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 
 const AngularModule = [FormsModule, RouterLink, ReactiveFormsModule];
 const MdbModule = [MdbFormsModule, MdbValidationModule];
-const ComponentModule = [SocialComponent]
+const ComponentModule = [SocialComponent];
+const AntModule = [NzMessageModule];
+
 @Component({
   selector: 'pm-login',
   standalone: true,
-  imports: [AngularModule, MdbModule, ComponentModule],
+  imports: [AngularModule, MdbModule, ComponentModule, AntModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -38,7 +41,8 @@ export class LoginComponent {
   constructor(
     private builder: FormBuilder,
     private router: Router,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private message: NzMessageService
   ) {
     this.validationForm = this.builder.group({
       email: new FormControl('', [Validators.email, Validators.required]),
@@ -55,16 +59,22 @@ export class LoginComponent {
     return this.validationForm.get('password')!
   }
   handleSubmit() {
-    this.validationForm.markAllAsTouched()
-    this.waiting = true;
-    this.http.post('/auth/login', this.validationForm.value).subscribe((res: any) => {
-      if (!res.error) {
-        this.waiting = false
-        this.cookie.set('user', res.token, { path: '/' })
-        this.router.navigateByUrl('/').then(() => {
-          window.location.reload()
-        })
-      }
-    })
+    if (this.validationForm.invalid)
+      this.validationForm.markAllAsTouched()
+    else {
+      this.waiting = true;
+      this.http.post('/auth/login', this.validationForm.value).subscribe((res: any) => {
+        if (!res.error) {
+          this.waiting = false
+          this.cookie.set('user', res.token, { path: '/' })
+          this.router.navigateByUrl('/').then(() => {
+            window.location.reload()
+          })
+        } else {
+          this.message.error(res.message)
+          this.waiting = false
+        }
+      })
+    }
   }
 }

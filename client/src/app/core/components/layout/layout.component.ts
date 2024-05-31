@@ -3,7 +3,6 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Router, RouterOutlet } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { Http } from '../../../shared/http/http.service';
 import { UserService } from '../../../shared/user/user.service';
 
@@ -19,7 +18,6 @@ export class LayoutComponent {
   user = inject(UserService)
   constructor(
     private router: Router,
-    private cookie: CookieService
   ) { }
   ngDoCheck() {
     const url = this.router.url

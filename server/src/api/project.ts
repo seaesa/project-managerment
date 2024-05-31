@@ -5,13 +5,14 @@ const prisma = new PrismaClient()
 
 export const project = new Elysia()
   // [POST] /api/create-product : create a project
-  .post('/api/create-product', async ({ body }) => {
+  .post('/api/project/create', async ({ body }) => {
     const { name, description, leader, member } = body as any
     const product = await prisma.project.create({
       data: {
         name,
         description,
         leader,
+        member
       }
     })
     return { error: false, product }
@@ -24,6 +25,6 @@ export const project = new Elysia()
      */
     beforeHandle(context) {
       const { name, description, leader, member } = context.body as any
-      if (!name || !description || !leader || !member) return { error: true, message: 'data nt found!' }
+      if (!name || !description || !leader || !member) return { error: true, message: 'missing data, please try again!' }
     },
   })

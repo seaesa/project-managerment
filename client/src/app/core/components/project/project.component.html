@@ -1,4 +1,8 @@
 <div class="d-flex flex-column gy-4 row">
-  <project-header></project-header>
-  <project-content></project-content>
+  <project-header (openModal)="handleOpenModal()"></project-header>
+  <project-content (openModal)="handleOpenModal()"></project-content>
 </div>
+@if (open) {
+<pm-add-project (closeModal)="handleCloseModal()"></pm-add-project>
+}
+<router-outlet></router-outlet>
