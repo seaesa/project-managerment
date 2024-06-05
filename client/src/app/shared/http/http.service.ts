@@ -44,7 +44,7 @@ export class Http {
   }): Observable<Object> {
     return this.http.post(`${environment.API_URL}${url}`, body, options)
   }
-  delete(url: string, options: {
+  delete(url: string, options?: {
     headers?: HttpHeaders | {
       [header: string]: string | string[];
     };
@@ -54,11 +54,11 @@ export class Http {
       [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
     };
     reportProgress?: boolean;
-    responseType: 'arraybuffer';
+    responseType?: 'json';
     withCredentials?: boolean;
     body?: any | null;
   }): Observable<ArrayBuffer> {
-    return this.http.delete(`${environment.API_URL}${url}`, options)
+    return this.http.delete(`${environment.API_URL}${url}`, options as any)
   }
   patch(url: string, body: any | null, options: {
     headers?: HttpHeaders | {

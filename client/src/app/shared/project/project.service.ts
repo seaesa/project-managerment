@@ -14,13 +14,12 @@ export class ProjectService {
   getProject() {
     return this.projects
   }
-  setProjects(project: any[]) {
-    this.projects = project
-  }
-  getAllProjects() {
+  getAllProjects(callback?: Function) {
     this.http.get('/project/all-project').subscribe((res: any) => {
       if (!res.error) {
         this.projects = res.project
+        if (callback)
+          callback(res)
       }
     })
   }

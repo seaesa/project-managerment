@@ -4,9 +4,8 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './social.component.html',
-  styleUrl: './social.component.scss'
+  styleUrl: './social.component.scss',
 })
 export class SocialComponent {
   @Input() icon = ''
-
 }

@@ -14,23 +14,23 @@ import { ProjectDetailComponent } from './core/components/project-detail/project
 export const routes: Routes = [
   {
     path: 'auth', component: ProtectedComponent, children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignupComponent },
-      { path: 'verify-user', component: VerifycodeComponent },
+      { path: 'login', title: 'Login', component: LoginComponent },
+      { path: 'signup', title: 'Signup', component: SignupComponent },
+      { path: 'verify-user', title: 'Verify', component: VerifycodeComponent },
     ]
   },
   {
     path: '', component: LayoutComponent, children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'dashboard', title: 'Dashboard', component: DashboardComponent },
       {
-        path: 'project', component: ProjectComponent, children: [
+        path: 'project', title: 'Project', component: ProjectComponent, children: [
           { path: ':id', component: ProjectDetailComponent }
         ]
       },
-      { path: 'report', component: ReportComponent },
-      { path: 'settings', component: SettingComponent },
-      { path: 'analytics', component: AnalyticComponent },
+      { path: 'report', title: 'Report', component: ReportComponent },
+      { path: 'settings', title: 'Settings', component: SettingComponent },
+      { path: 'analytics', title: 'Analytics', component: AnalyticComponent },
     ]
   },
-  { path: '**', component: ErrorComponent }
+  { path: '**', title: 'Error', component: ErrorComponent }
 ];

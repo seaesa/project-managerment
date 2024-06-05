@@ -19,23 +19,23 @@ export class ProjectContentComponent {
   http = inject(Http);
   projectService = inject(ProjectService)
   openModal = output()
+  closeModal = output()
   sekeleton = true
   projects: any[] = []
-  // ngDoCheck() {
-  //   this.projects = this.projectService.getProject()
-  // }
+  ngDoCheck() {
+    this.projects = this.projectService.getProject()
+  }
   handleOpenModal() {
     this.openModal.emit()
   }
+  handleCloseModal() {
+    this.closeModal.emit()
+  }
   ngOnInit() {
-    this.http.get('/project/all-project').subscribe((res: any) => {
-      if (!res.error) {
-        this.projectService.setProjects(res.project)
-        this.projects = this.projectService.getProject()
-        setTimeout(() => {
-          this.sekeleton = false
-        }, 2000)
-      }
+    this.projectService.getAllProjects((res: any) => {
+      setTimeout(() => {
+        this.sekeleton = false
+      }, 2000)
     })
   }
 }
