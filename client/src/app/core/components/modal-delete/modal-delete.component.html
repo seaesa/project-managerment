@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="title">Waring</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+  <h5>You want delete this project</h5>
+</div>
+<div class="modal-footer">
+  <button type="button" (click)="closeModal()" class="btn btn-secondary"> Cancel </button>
+  <button [disabled]="waiting" type="button" (click)="handleDeleteProject()"
+    class="btn btn-primary d-flex align-items-center">
+    <span [hidden]="!waiting" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+    {{waiting ? 'waiting...':'Ok'}}</button>
+</div>

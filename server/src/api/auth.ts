@@ -3,7 +3,7 @@ import helper from "../helper/helper";
 import bcrypt from 'bcrypt'
 import { PostTypes } from "../types/postTypes";
 import { PrismaClient } from "@prisma/client";
-
+import unidecode from 'unidecode'
 // initial prisma client query to database
 const prisma = new PrismaClient()
 // a instance elysia
@@ -24,7 +24,7 @@ export const auth = new Elysia()
          * and two parameter is password has hash in db and return boolean
          * @verifyPassword : boolean
          */
-        const verifyPassword = bcrypt.compareSync(password, user.password)
+        const verifyPassword = bcrypt.compareSync(password, user.password as any)
         if (!verifyPassword) throw new Error('password is incorrect')
       } else
         throw new Error('Email does not exist!')
@@ -193,5 +193,40 @@ export const auth = new Elysia()
     beforeHandle(context) {
       const { token } = context.body as any
       if (!token) return { error: true, message: 'Token not found!' }
+    }
+  })
+  .post('/api/auth/google', async ({ body, jwt }: PostTypes) => {
+    try {
+      const { email, displayName, image } = body
+      const user = await prisma.user.findUnique({
+        where: {
+          email
+        }
+      })
+      if (user) {
+        const data = {
+          userId: user.id,
+          role: user.role
+        }
+        const token = await jwt?.sign(data as object)
+        return { error: false, user, token }
+      } else {
+        const user = await prisma.user.create({
+          data: {
+            email,
+            displayName: unidecode(displayName),
+            username: helper.transformEmailToUsername(email),
+            image
+          }
+        })
+        const data = {
+          userId: user.id,
+          role: user.role
+        }
+        const token = await jwt?.sign(data as object)
+        return { error: false, user, token }
+      }
+    } catch (error: any) {
+      return { error: true, message: error.message }
     }
   })

@@ -14,11 +14,18 @@ const AngularModule = [RouterOutlet]
   styleUrl: './project.component.scss'
 })
 export class ProjectComponent {
-  open = false
-  handleCloseModal() {
-    this.open = false
+  openAddProject = false
+  openProjectDetail = false
+  handleCloseModalAddProject() {
+    this.openAddProject = false
   }
-  handleOpenModal() {
-    this.open = true
+  handleOpenModalAddProject() {
+    this.openAddProject = true
+  }
+  handleCloseModalProjectDefailt() {
+    this.openAddProject = false
+  }
+  handleOpenModalProjectDetail() {
+    this.openAddProject = true
   }
 }

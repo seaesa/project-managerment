@@ -7,6 +7,7 @@ import { SocialComponent } from '../social/social.component';
 import { Http } from '../../../shared/http/http.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthService } from '@abacritt/angularx-social-login';
 
 const AngularModule = [FormsModule, RouterLink, ReactiveFormsModule];
 const MdbModule = [MdbFormsModule, MdbValidationModule];
@@ -16,7 +17,7 @@ const AntModule = [NzMessageModule];
 @Component({
   selector: 'pm-login',
   standalone: true,
-  imports: [AngularModule, MdbModule, ComponentModule, AntModule],
+  imports: [AngularModule, MdbModule, ComponentModule, AntModule, GoogleSigninButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -29,9 +30,6 @@ export class LoginComponent {
       icon: 'fab fa-facebook-f'
     },
     {
-      icon: 'fab fa-google'
-    },
-    {
       icon: 'fab fa-twitter'
     },
     {
@@ -42,7 +40,8 @@ export class LoginComponent {
     private builder: FormBuilder,
     private router: Router,
     private cookie: CookieService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private authService: SocialAuthService
   ) {
     this.validationForm = this.builder.group({
       email: new FormControl('', [Validators.email, Validators.required]),
@@ -76,5 +75,23 @@ export class LoginComponent {
         }
       })
     }
+  }
+  ngOnInit() {
+    this.authService.authState.subscribe((user: any) => {
+      this.http.post('/auth/google', {
+        email: user.email,
+        displayName: user.firstName,
+        image: user.photoUrl,
+        username: user.name
+      }).subscribe((res: any) => {
+        this.cookie.set('user', res.token, { path: '/' })
+        this.router.navigateByUrl('/').then(() => {
+          window.location.reload()
+        })
+      })
+    })
+  }
+  loginWithGG() {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
   }
 }

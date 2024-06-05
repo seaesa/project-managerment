@@ -54,9 +54,15 @@
         <div class="text-center">
           <p>Not a member? <a routerLink="/auth/signup">Register</a></p>
           <p>or login with:</p>
-          @for (item of social; track $index) {
-          <pm-social [icon]="item.icon"></pm-social>
-          }
+          <div class="d-flex justify-content-center">
+            <button (click)="loginWithGG()" mdbRipple type="button" class="btn btn-secondary btn-floating mx-2">
+              <asl-google-signin-button shape="circle" type='icon' size='large'
+                theme="outline"></asl-google-signin-button>
+            </button>
+            @for (item of social; track $index) {
+            <pm-social [icon]="item.icon"></pm-social>
+            }
+          </div>
         </div>
       </form>
     </div>

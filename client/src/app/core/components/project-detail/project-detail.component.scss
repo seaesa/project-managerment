@@ -1,0 +1,15 @@
+.show-animation {
+  animation: show .2s forwards ease-out;
+}
+
+@keyframes show {
+  from {
+    transform: scale(0.5);
+    opacity: .7;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

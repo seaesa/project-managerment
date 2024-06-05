@@ -5,7 +5,7 @@ import { Http } from '../../../shared/http/http.service';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ProjectService } from '../../../shared/project/project.service';
 const MdbModule = [MdbFormsModule, MdbValidationModule];
 const AngularModule = [FormsModule, ReactiveFormsModule, CommonModule];
 const AntModule = [NzSelectModule];
@@ -42,6 +42,7 @@ export class AddProjectComponent {
   leaders: Array<any> = []
   closeModal = output()
   destroyRef = inject(DestroyRef)
+  projectService = inject(ProjectService)
   constructor(
     private builder: FormBuilder
   ) {
@@ -73,9 +74,11 @@ export class AddProjectComponent {
       this.getLeader().invalid && (this.leaderStatus = 'error')
     } else {
       this.waiting = true
-      // this.http.post('/project/create', this.formWrap.value).subscribe(res => {
-      //   this.waiting = false 
-      // })
+      this.http.post('/project/create', this.formWrap.value).subscribe(res => {
+        this.waiting = false
+        this.closeModal.emit()
+        this.projectService.refreshProject()
+      })
     }
   }
   handleHiddenModal() {

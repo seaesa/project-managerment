@@ -1,1 +1,31 @@
-<p>project-detail works!</p>
+<div style="background: rgb(60 60 60 / 30%); z-index: 100;"
+  class="d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0">
+  <div
+    class="d-flex flex-column justify-content-center align-items-center bg-light shadow-5-strong w-50 rounded-4 px-2 py-2 overflow-auto show-animation">
+    <div class="ms-auto">
+      <button (click)="handleHideModal()" type="button" class="btn btn-light btn-floating" rippleColor="dark" mdbRipple>
+        <i class="fa-solid fa-xmark fa-xl"></i>
+      </button>
+    </div>
+    <div>
+      <div class="d-flex">
+        <div>
+          <img src="" alt="">
+        </div>
+        <div>
+          <h3>Javascript</h3>
+          <span>date...</span>
+        </div>
+      </div>
+      <div class="content">
+        some thing...
+      </div>
+    </div>
+    <div class="d-flex w-100">
+      <button type="button" (click)="requestDelete()" class="btn   btn-danger btn-rounded ms-auto" mdbRipple>
+        <i class="fas fa-trash me-2"></i>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
