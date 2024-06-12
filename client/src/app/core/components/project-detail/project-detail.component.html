@@ -1,31 +1,99 @@
 <div style="background: rgb(60 60 60 / 30%); z-index: 100;"
   class="d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0">
-  <div
-    class="d-flex flex-column justify-content-center align-items-center bg-light shadow-5-strong w-50 rounded-4 px-2 py-2 overflow-auto show-animation">
-    <div class="ms-auto">
-      <button (click)="handleHideModal()" type="button" class="btn btn-light btn-floating" rippleColor="dark" mdbRipple>
+  <div class="d-flex flex-column bg-light shadow-5-strong w-50 rounded-4 px-2 py-2 overflow-auto show-animation">
+    <div class="d-flex justify-content-between">
+      <button (click)="handleHideModal()" type="button" class="btn btn-light btn-floating order-1" rippleColor="dark"
+        mdbRipple>
         <i class="fa-solid fa-xmark fa-xl"></i>
       </button>
+      <div class="d-flex order-0 align-items-center">
+        <i class="fa-solid fa-signature mx-2"></i>
+        <h4 class="mb-0">Javascript</h4>
+        <i class="fa-solid fa-pen-to-square mx-2"></i>
+      </div>
     </div>
-    <div>
-      <div class="d-flex">
-        <div>
-          <img src="" alt="">
-        </div>
-        <div>
-          <h3>Javascript</h3>
-          <span>date...</span>
-        </div>
+    <div class="d-flex flex-column">
+      <div style="width: 90%;" class="my-2 d-flex align-items-center">
+        <nz-input-group [nzPrefix]="suffixTemplateInfo">
+          <input type="text" nz-input placeholder="Enter your username" [disabled]="true" />
+        </nz-input-group>
+        <ng-template #suffixTemplateInfo>
+          <i class="fa-solid fa-circle-info mx-2"></i>
+        </ng-template>
+        <i class="fa-solid fa-pen-to-square mx-2"></i>
       </div>
-      <div class="content">
-        some thing...
+      <div class="ms-auto">
+        <button (click)="openTask()" class="btn btn-light btn-floating" rippleColor="dark" mdbRipple>
+          <i class="fas fa-plus fa-xl"></i>
+        </button>
       </div>
+
+
+      <nz-table #filterTable [nzData]="tasks" nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th *ngFor="let column of listOfColumns" [(nzSortOrder)]="column.sortOrder" [nzSortFn]="column.sortFn"
+              [nzFilters]="column.listOfFilter" [nzFilterFn]="column.filterFn">
+              {{ column.name }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(data of filterTable.data;track data) {
+          <tr>
+            <td>{{ data.name }}</td>
+            <td>{{ data.description }}</td>
+          </tr>
+          }
+        </tbody>
+      </nz-table>
+
+
     </div>
     <div class="d-flex w-100">
-      <button type="button" (click)="requestDelete()" class="btn   btn-danger btn-rounded ms-auto" mdbRipple>
+      <button type="button" (click)="requestDelete()" class="btn btn-danger btn-rounded ms-auto" mdbRipple>
         <i class="fas fa-trash me-2"></i>
         Delete
       </button>
     </div>
+    @if(open) {
+    <div style="background: rgb(60 60 60 / 30%);
+    z-index: 100;"
+      class="d-flex justify-content-center align-items-center position-fixed top-0 bottom-0 start-0 end-0">
+      <div
+        class="d-flex flex-column justify-content-center align-items-center bg-light shadow-5-strong w-75 rounded-4 px-2 py-2 overflow-auto show-animation">
+        <button (click)="hiddenTask()" type="button" class="btn btn-light btn-floating ms-auto" rippleColor="dark"
+          mdbRipple>
+          <i class="fa-solid fa-xmark fa-xl"></i>
+        </button>
+        <form style="min-width: 90%;" (ngSubmit)="handleAddTask()" [formGroup]="formWrap">
+          <!-- Text input -->
+          <mdb-form-control class=" mb-4">
+            <input formControlName="name" mdbInput mdbValidate type="text" id="nameProject" class="form-control"
+              name="name" />
+            <label mdbLabel class="form-label" for="nameProject">Project Name</label>
+          </mdb-form-control>
+
+          <!-- Message input -->
+          <mdb-form-control class="form-outline mb-4">
+            <textarea formControlName="description" mdbValidate mdbInput class="form-control" id="description" rows="3"
+              name="description"></textarea>
+            <label mdbLabel class="form-label" for="description">Description</label>
+          </mdb-form-control>
+          <!-- Submit button -->
+          <div class="d-flex justify-content-end mb-4">
+            <button (click)="hiddenTask()" mdbRipple type="button" class="btn btn-light mx-2">
+              Cancel
+            </button>
+            <button [disabled]="formWrap.invalid || waiting" mdbRipple type="submit" class="btn btn-primary mx-2">
+              <span [hidden]="!waiting" class="spinner-border spinner-border-sm mx-2" role="status"
+                aria-hidden="true"></span>
+              {{waiting ? 'waiting...': 'Create'}}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    }
   </div>
 </div>

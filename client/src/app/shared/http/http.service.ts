@@ -14,11 +14,9 @@ export class Http {
     };
     context?: HttpContext;
     observe?: 'body';
-    params?: HttpParams | {
-      [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
-    };
+    params?: any
     reportProgress?: boolean;
-    responseType: 'arraybuffer';
+    responseType: 'arraybuffer' | 'json';
     withCredentials?: boolean;
     transferCache?: {
       includeHeaders?: string[];

@@ -25,3 +25,20 @@ export default new Elysia()
       return { error: true, message: error }
     }
   })
+  .get('/api/project/get-task', async ({ body, params, query }) => {
+    const { id } = query as any
+    try {
+      const tasks = await prisma.task.findMany({
+        where: {
+          projectId: id
+        }
+      })
+      return { error: false, tasks }
+    } catch (err: any) {
+      return { error: false, message: err.message }
+    }
+  })
+  .get('/api/project/current', async ({ query }) => {
+    console.log(query)
+    return { error: false }
+  })

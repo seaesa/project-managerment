@@ -1,7 +1,8 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { MdbRippleModule } from 'mdb-angular-ui-kit/ripple';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Http } from '../../../shared/http/http.service';
 
 
 const MdbModule = [MdbRippleModule];
@@ -15,7 +16,6 @@ const AnngularModule = [CommonModule, FormsModule]
 })
 export class ProjectHeaderComponent {
   openModal = output()
-
   constructor() { }
   openModalAddProduct() {
     this.openModal.emit()

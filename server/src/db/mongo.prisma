@@ -55,7 +55,7 @@ model Task {
   member      User[]
   startDate   DateTime @default(now())
   endDate     DateTime @updatedAt
-  progess     String
+  progess     String?
 }
 
 model VerifyOTP {

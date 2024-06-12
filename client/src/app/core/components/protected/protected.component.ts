@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Http } from '../../../shared/http/http.service';
 import { CookieService } from 'ngx-cookie-service';

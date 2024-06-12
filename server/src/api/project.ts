@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import Elysia from "elysia";
+import { PostTypes } from "../types/postTypes";
 
 const prisma = new PrismaClient()
 
@@ -27,4 +28,19 @@ export const project = new Elysia()
       const { name, description, leader, member } = context.body as any
       if (!name || !description || !leader || !member) return { error: true, message: 'missing data, please try again!' }
     },
+  })
+  .post('/api/project/add-task', async ({ body }: PostTypes) => {
+    const { projectId, name, description } = body;
+    try {
+      const task = await prisma.task.create({
+        data: {
+          name: name || '',
+          description: description || '',
+          projectId,
+        }
+      })
+      return { error: false, task }
+    } catch (err: any) {
+      return { error: true, message: err.message }
+    }
   })
