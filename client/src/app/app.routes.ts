@@ -11,8 +11,7 @@ import { ReportComponent } from './core/components/report/report.component';
 import { SettingComponent } from './core/components/setting/setting.component';
 import { AnalyticComponent } from './core/components/analytic/analytic.component';
 import { ProjectDetailComponent } from './core/components/project-detail/project-detail.component';
-import { inject } from '@angular/core';
-import { Http } from './shared/http/http.service';
+
 export const routes: Routes = [
   {
     path: 'auth', component: ProtectedComponent, children: [

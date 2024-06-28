@@ -3,6 +3,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { Http } from './shared/http/http.service';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from './shared/user/user.service';
+import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'pm-root',
   standalone: true,
