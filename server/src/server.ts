@@ -27,8 +27,8 @@ env.config();
       .use(cors())
       .use(Router)
       .listen(port, () => console.log(`app running on port: http://localhost:${port}`))
-  } catch (error) {
-    return { error: true, message: error }
+  } catch (error: any) {
+    return { error: true, message: error.message }
   } finally {
     await prisma.$disconnect()
   }
