@@ -6,7 +6,7 @@
     "schema": "src/db/mongo.prisma"
   },
   "scripts": {
-    "dev": "npm run prisma && bun run --watch src/server.ts",
+    "dev": "bun run prisma && bun run --watch src/server.ts",
     "start": "bun run src/server.ts",
     "reset": "npx prisma db push",
     "prisma": "prisma generate"
