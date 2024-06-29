@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "bun run prisma && bun run --watch src/server.ts",
-    "start": "bun run src/server.ts",
+    "start": "bun run prisma && bun run src/server.ts",
     "reset": "npx prisma db push",
     "prisma": "prisma generate"
   },
