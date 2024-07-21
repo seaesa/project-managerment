@@ -6,8 +6,8 @@
     "schema": "src/db/mongo.prisma"
   },
   "scripts": {
-    "dev": "bun run --watch src/server.ts",
-    "reset": "npx prisma db push"
+    "dev": "bun run reset && bun run --watch src/server.ts",
+    "reset": "bunx prisma db push"
   },
   "dependencies": {
     "@elysiajs/bearer": "^1.0.2",

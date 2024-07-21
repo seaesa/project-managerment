@@ -1,15 +1,13 @@
-# Elysia with Bun runtime
+# Welcome to Project Management From Server
 
-## Getting Started
-To get started with this template, simply paste this command into your terminal:
+Requied: BunJs `https://bun.sh/`
+## Get Started: 
 ```bash
-bun create elysia ./elysia-example
+ bun install
+ bun run dev
 ```
 
-## Development
-To start the development server run:
+## To load Env File
 ```bash
-bun run dev
+cp .env.example .env
 ```
-
-Open http://localhost:3000/ with your browser to see the result.

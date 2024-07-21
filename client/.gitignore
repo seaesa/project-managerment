@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 # config ignore
 src/environments/*
-package-*.json 
+package-*.json
+bun.lockb

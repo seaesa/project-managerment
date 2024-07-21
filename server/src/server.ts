@@ -1,3 +1,4 @@
+import path from 'path';
 import { Elysia } from 'elysia'
 import { Logestic } from 'logestic';
 import cors from '@elysiajs/cors';
